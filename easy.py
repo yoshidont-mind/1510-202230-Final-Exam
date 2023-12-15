@@ -54,3 +54,57 @@ _______________________________________
 Yes. The main function should invoke your function with a simple example.
 
 """
+
+
+def merge(first, second):
+    """
+    Merge the given lists.
+
+    :param first: a list of sortable object that is pre-sorted
+    :param second: a list of sortable object that is pre-sorted
+    :precondition: first must be a list
+    :precondition: elements of first must be sortable
+    :precondition: elements of first must be pre-sorted
+    :precondition: second must be a list
+    :precondition: elements of second must be sortable
+    :precondition: elements of second must be pre-sorted
+    :postcondition: a new sorted list that contains the elements from first and second is returned
+    :return: a new sorted list that contains the elements from first and second
+    >>> some_list = [1, 5, 9]
+    >>> some_other_list = [-10, 44, 100]
+    >>> merge(some_list, some_other_list)
+    [-10, 1, 5, 9, 44, 100]
+    >>> some_list = ["apple", "orange", "tamarind"]
+    >>> some_other_list = ["applesauce", "bread", "watermelon"]
+    >>> merge(some_list, some_other_list)
+    ['apple', 'applesauce', 'bread', 'orange', 'tamarind', 'watermelon']
+    """
+    # set initial values
+    new_list = []
+    index_first = 0
+    index_second = 0
+
+    # append elements to new_list until reaching end of either first or second
+    while index_first < len(first) and index_second < len(second):
+        if first[index_first] < second[index_second]:
+            new_list.append(first[index_first])
+            index_first += 1
+        else:
+            new_list.append(second[index_second])
+            index_second += 1
+
+    # append remaining elements
+    new_list += first[index_first:]
+    new_list += second[index_second:]
+
+    return new_list
+
+
+def main():
+    some_list = ["chris", "nabil", "sam"]
+    some_other_list = ["hoda", "maryam"]
+    print(f"When you merge {some_list} and {some_other_list}, the result is:\n {merge(some_list, some_other_list)}")
+
+
+if __name__ == "__main__":
+    main()
