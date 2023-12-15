@@ -67,3 +67,39 @@ _______________________________________
 Yes. The main function should contain the code in the examples to demo your code.
 
 """
+
+
+def denomination_registrar(denominations):
+    def change_maker(amount):
+        hundred_times_amount = int(amount * 100)
+        destination_list = [0] * len(denominations)
+        list_of_denominations = denominations
+
+        for number in range(len(denominations)):
+            destination_list[number] += int(hundred_times_amount // (list_of_denominations[number] * 100))
+            hundred_times_amount = int(hundred_times_amount % (list_of_denominations[number] * 100))
+        if hundred_times_amount >= 3:
+            destination_list[len(denominations) - 1] += 1
+
+        return destination_list
+
+    return change_maker
+
+
+def main():
+    # sample usage example 1
+    canadian_denominations = (100, 50, 20, 10, 5, 2, 1, 0.25, 0.10, 0.05)
+    canadian_change_maker = denomination_registrar(canadian_denominations)
+    canadian_breakdown = canadian_change_maker(66.53)
+    print(canadian_breakdown)  # expected: [0, 1, 0, 1, 1, 0, 1, 2, 0, 1]
+
+    # sample usage example 2
+    euro_denominations = (500, 200, 100, 50, 20, 10, 5, 2, 1, .50, .20, .10, .05)
+    euro_change_maker = denomination_registrar(euro_denominations)
+    euro_breakdown = euro_change_maker(870.53)
+    print(euro_breakdown)  # expected: [1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1]
+
+
+if __name__ == "__main__":
+    main()
+
