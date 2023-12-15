@@ -49,3 +49,28 @@ _______________________________________
 Yes. The main function should invoke your function, so I can execute your code and examine zen_copy.txt
 
 """
+
+
+def zen():
+    # read the content of zen.txt
+    with open("zen.txt") as zen_file:
+        lines = zen_file.readlines()
+        lines.pop(0)
+        lines.pop(0)
+        print(lines)
+
+    # sort and label the content
+    lines_sorted_and_numbered = list(enumerate(sorted(lines), 1))
+
+    # create new file and write the sorted and labeled content
+    with open("zen_copy.txt", 'w') as zen_copy:
+        for line in lines_sorted_and_numbered:
+            zen_copy.write(f"{line[0]}. {line[1]}")
+
+
+def main():
+    zen()
+
+
+if __name__ == "__main__":
+    main()
