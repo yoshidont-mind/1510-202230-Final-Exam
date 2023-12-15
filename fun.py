@@ -50,7 +50,6 @@ Yes. The main function should invoke your function, so I can execute your code a
 
 """
 
-
 def zen():
     # read the content of zen.txt
     with open("zen.txt") as zen_file:
